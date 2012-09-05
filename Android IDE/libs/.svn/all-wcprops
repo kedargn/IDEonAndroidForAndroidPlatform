@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 27
+/svn/!svn/ver/89/trunk/libs
+END
+zipsigner-lib_all.jar
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/37/trunk/libs/zipsigner-lib_all.jar
+END
+bsh.jar
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/37/trunk/libs/bsh.jar
+END
+dx_ta.jar
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/73/trunk/libs/dx_ta.jar
+END
+ecj.jar
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/37/trunk/libs/ecj.jar
+END
+sdklib_ta.jar
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/73/trunk/libs/sdklib_ta.jar
+END

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="#FFFFFF" 
+    android:orientation="vertical"
+    
+     >
+    
+    <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_gravity="center_vertical"
+   android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:layout_marginBottom="20dp">
+	<Button 
+	    android:paddingLeft="30dp"
+	   android:layout_marginTop="15dp"
+	    android:text="w"
+	    android:textSize="1dp"
+	    android:background="@drawable/wid1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       />
+	<TextView 
+	    android:paddingLeft="50dp"
+	    android:textStyle="bold"
+        android:text="So, you have the widgets..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textColor="#003399"/>
+ 
+ 
+    
+         
+    <LinearLayout
+        android:layout_marginLeft="80dp"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        
+        >
+    
+    
+    <Button
+        android:layout_weight="1" 
+        android:id="@+id/btnwdgt"
+        android:paddingBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="wdgtProprts"
+        android:background="@drawable/newproj"
+        android:text="Button"
+        android:textSize="1dp"
+        
+       android:layout_marginBottom="10dp"
+    />
+    
+    <Button
+ 		android:paddingBottom="10dp"
+        android:id="@+id/chkbxwdgt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="wdgtProprts"
+        android:background="@drawable/check"
+        android:textSize="1dp"
+        android:gravity="center_horizontal"        
+        android:text="CheckBox"
+         android:layout_marginBottom="10dp"
+    />
+     
+    <Button
+        android:id="@+id/tvwdgt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:background="@drawable/text"
+        android:onClick="wdgtProprts"
+         android:layout_marginBottom="10dp"
+        android:text="TextView"
+        android:textSize="1dp" />
+    	
+    <Button
+        android:layout_weight="1" 
+        android:id="@+id/fieldwdgt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="wdgtProprts"
+        android:textSize="1dp"
+       android:textStyle="bold"
+        android:text="EditText"
+         android:layout_marginBottom="10dp"
+        android:background="@drawable/edit"
+    />
+        <Button 
+          android:layout_weight="1" 
+        android:id="@+id/radiowdgt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="wdgtProprts"
+        android:textSize="1dp"
+    android:layout_marginBottom="10dp"
+        android:text="RadioButton"  
+        android:background="@drawable/radio"
+            />
+     <Button 
+          android:layout_weight="1" 
+        android:id="@+id/spinnerwdgt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="wdgtProprts"
+        android:textSize="1dp"
+   		android:background="@drawable/spi"
+   		 android:layout_marginBottom="10dp"
+        android:text="Spinner"  
+        
+            />
+    
+   </LinearLayout>
+   </LinearLayout>
+   </ScrollView>
+    

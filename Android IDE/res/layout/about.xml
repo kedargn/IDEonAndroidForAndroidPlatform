@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/ms1"
+    android:orientation="vertical" >
+<TextView
+	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:textSize="30dp"
+  	android:textStyle="bold"
+    android:textColor="#FF0000"
+    android:paddingTop="60dp"   
+  	android:text="Hi  !!"/>
+<TextView
+	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:textSize="20dp"
+  	android:textStyle="bold"
+  	android:textColor="#FFFFFF"
+  	android:text="AndIDE is a application to provide a developing environment to develop android applications on an andoid device. AndIDE has all the tools necessary to build an android application.The installable file for the created project will be stored in sdcard/wokspace/your project name/bin folder. During any point of building process the reason for failure wil be logged in the file native_err in the sdcard/logdata" />
+ <Button 
+ 	android:id="@+id/aboutok" 
+  	android:paddingTop="15dp"
+  	android:layout_marginLeft="235dp"
+  	android:background="@drawable/okbutton"
+     android:textSize="1dp"   
+  	android:layout_width="wrap_content"
+  	android:layout_height="wrap_content"
+  	android:text="OK" />
+      
+ </LinearLayout>

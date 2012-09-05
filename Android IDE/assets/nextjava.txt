@@ -1,0 +1,605 @@
+package org.example.hello;
+
+import java.io.File;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+public class Next extends Activity {
+    /** Called when the activity is first created. */
+	File f;
+	boolean creditFlaf=false;
+	static String createTable;
+	String[] fieldNames;
+	String fullFieldNames;
+	DataBaseHelper dtbasehelper;
+	SQLiteDatabase db;
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //setContentView(R.layout.);
+        f=new File("/data/data/"+this.getPackageName()+"/databases"); 
+        setContentView(R.layout.next);
+        if(f.exists())
+        dtbasehelper=new DataBaseHelper(this);
+    }
+    
+    public void onDatabase(View v) {
+   	 
+    	final Dialog fields=new Dialog(this);
+    	LinearLayout ll=new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	
+    	TextView tv=new TextView(this);
+    	tv.setText("Enter the fields name separated by comma");
+    	ll.addView(tv);
+    	EditText et=new EditText(this);
+    	et.setId(10);
+    	et.setText("Name,Amount");
+    	ll.addView(et);
+    	
+    	Button btn=new Button(this);
+    	btn.setText("Create");
+    	ll.addView(btn);
+    	
+    	fields.setContentView(ll);
+    	fields.show();
+    	btn.setOnClickListener(new OnClickListener(){
+    		public void onClick(View v) {
+    			
+    			EditText fEt=(EditText)fields.findViewById(10);
+    			fullFieldNames=fEt.getText().toString();
+    			if(!fullFieldNames.equals("")){
+    			fields.dismiss();
+    			createTable();
+    			}
+    			else{
+    				alert("Field is empty");
+    			}
+    		}
+    	});
+    	
+    }
+    	public void createTable(){
+    		
+    	fieldNames=fullFieldNames.split(",");
+    	createTable="CREATE TABLE bank(_id INTEGER PRIMARY KEY AUTOINCREMENT";
+    	
+    	 for(int i=0;i<fieldNames.length;i++) {
+    	createTable+=","+fieldNames[i];
+    	 }
+    	createTable+=");";
+    	
+    	Log.i("the create query is",createTable);
+    	 dtbasehelper=new DataBaseHelper(this);	
+    	 db=dtbasehelper.getReadableDatabase();
+    	 
+    	 
+    }
+    
+    
+    
+    public void onCreateAccount(View v){
+    	
+    	if(f.exists()) {
+    	final Dialog d=new Dialog(this);
+    	d.setTitle("Enter the details");
+    	TableLayout tl=new TableLayout(this);
+    	TableRow tr=new TableRow(this);
+    	
+    	TextView tv=new TextView(this);
+    	tv.setText("Name");
+    	EditText et=new EditText(this);
+    	et.setText("Enter Name");
+    	et.setId(1);
+    	tr.addView(tv);
+    	tr.addView(et);
+    	TableRow tr1=new TableRow(this);
+    	TextView tv1=new TextView(this);
+    	tv1.setText("Initial Amount");
+    	EditText et1=new EditText(this);
+    	et1.setText("Enter Amount");
+    	et1.setId(2);
+    	tr1.addView(tv1);
+    	tr1.addView(et1);
+    	TableRow tr2=new TableRow(this);
+    	Button okBtn=new Button(this);
+    	okBtn.setText("OK");
+    	okBtn.setId(3);
+    	tr2.addView(okBtn);
+    	
+    	tl.addView(tr);
+    	tl.addView(tr1);
+    	tl.addView(tr2);
+    	d.setContentView(tl);
+    	okBtn.setOnClickListener(new View.OnClickListener(){
+    		public void onClick(View v)
+    		{
+    			
+    			EditText e=(EditText)d.findViewById(1);
+    			EditText e1=(EditText)d.findViewById(2);
+    			String s=e.getText().toString();
+    			String s1=e1.getText().toString();
+    			
+    try {			
+    	           d.dismiss();
+    	           if(s.matches("[a-zA-z ]+")){
+    	        	   
+    	           
+    			if(validate(s1)){
+    				if(!s.equals(""))
+    					if((Float.valueOf(s1.trim()).floatValue())>=500)
+    			enterValues(s,s1);
+    					else
+    						alert("the minimum balance should be Rs 500");
+    				else
+    					alert("Name field is empty");
+    				
+    			}
+    		  }else alert("Invalid inputs!!");
+    		}
+    		catch(NumberFormatException ewe){
+    	    	  alert("invalid input!!!!");
+    	      }
+    		}
+    	});
+    	d.show();
+    	}
+    	else {
+    		alert("Create Database first");
+    	}
+      
+    	
+    }
+
+    
+    public void enterValues(String s,String s1){
+    	
+    	long n;
+    	String insert="INSERT INTO bank IF EXISTS(Name,Amount) VALUES (";
+		
+    	db=dtbasehelper.getReadableDatabase();
+    	Cursor res=db.rawQuery("select * from bank", null);
+    	res.moveToLast();
+    	if(res.moveToLast()==false){
+    		
+    		n=20082120;
+    	}
+    	else
+    	{
+    		n=res.getLong(0);
+    		n=n+1;
+    	}
+    	db.close();
+    	db=dtbasehelper.getWritableDatabase();
+		
+		ContentValues cv=new ContentValues();
+		cv.put("_id", n);
+		cv.put("Name", s);
+		cv.put("Amount", s1);
+		long ret=db.insert("bank",null,cv);
+		if(ret==-1){
+			alert("error inserting values");
+		}
+			else{
+			db.close();
+			db=dtbasehelper.getReadableDatabase();
+	     res=db.rawQuery("select * from bank", null);
+	    	res.moveToLast();
+	    	
+	    	alert("Your Account ID is "+res.getString(0)+"\nPlease remember your Account ID for future refereneces");
+			}
+		}
+		
+    
+
+
+
+public void alert(String error){
+	AlertDialog.Builder msg=new AlertDialog.Builder(this);
+	
+	msg.setMessage(error).setCancelable(false)
+	.setPositiveButton("ok",new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface d,int id) {
+		
+			d.dismiss();
+			
+		}
+	});
+	msg.show();
+  }
+
+
+public void details(View v){
+	if(f.exists()){
+	final Dialog d=new Dialog(this);
+	d.setTitle("enter the Account ID");
+	TableLayout tl=new TableLayout(this);
+	TableRow tr=new TableRow(this);
+	
+	TextView tv=new TextView(this);
+	tv.setText("ID");
+	EditText et=new EditText(this);
+	et.setId(10);
+	et.setText("Enter ID");
+	tr.addView(tv);
+	tr.addView(et);
+	tl.addView(tr);
+	TableRow tr2=new TableRow(this);
+	Button okBtn=new Button(this);
+	okBtn.setText("OK");
+	okBtn.setId(30);
+	tr2.addView(okBtn);
+	tl.addView(tr2);
+	d.setContentView(tl);
+	okBtn.setOnClickListener(new View.OnClickListener(){
+		public void onClick(View v)
+		{
+			
+			EditText e=(EditText)d.findViewById(10);
+			if(validate(e.getText().toString())){
+			showDetails(e.getText().toString());
+			}
+			d.dismiss();
+			
+		}
+	});
+	
+	
+	d.show();
+	}
+	else{
+		alert("Create Database first");
+	}
+	
+}
+
+
+public void  showDetails(String s){
+	try {
+	db=dtbasehelper.getReadableDatabase();
+	Cursor res=db.rawQuery("select * from bank where _id="+s, null);
+	TableLayout tl=new TableLayout(this);
+	tl.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,TableLayout.LayoutParams.WRAP_CONTENT));
+	
+	
+	String[] colName=res.getColumnNames();
+	tl=showTable(tl,colName,1);
+	int len=colName.length;
+	String[] fieldVal=new String[len];
+			if((res.moveToFirst())==false)
+			{
+				alert("No such Account ID");
+			}
+			else{
+				for(int i=0;i<len;i++){
+					fieldVal[i]=res.getString(i);
+					
+				}
+				tl=showTable(tl,fieldVal,0);
+				Dialog dg=new Dialog(this);
+				
+				dg.setTitle("Account details");
+		    	WindowManager.LayoutParams lp=new WindowManager.LayoutParams();
+		    	lp.width=WindowManager.LayoutParams.FILL_PARENT;
+		    	lp.height=WindowManager.LayoutParams.WRAP_CONTENT;
+		    	
+		    	LinearLayout l=new LinearLayout(this);
+		    	l.setOrientation(LinearLayout.VERTICAL);
+		    	HorizontalScrollView hsv=new HorizontalScrollView(this);
+		        hsv.addView(l);
+		    	l.addView(tl);
+		    	
+		    	dg.setContentView(hsv);
+		    	dg.show();
+		    	dg.getWindow().setAttributes(lp);
+			}
+	}
+	catch(SQLiteException e){
+		alert("Inputs are Invalid");
+	}
+	     
+}
+
+public TableLayout showTable(TableLayout tl,String[] values,int heading) {
+	
+	TableRow tr=new TableRow(this);
+	tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
+	
+	for(int i=0;i<values.length;i++) {
+		TextView tv=new TextView(this);
+		if(heading==1)
+		tv.setText(values[i]+"     ");
+		else
+			tv.setText(values[i]+"  ");
+		tr.addView(tv);
+	}
+	tl.addView(tr);
+	return tl;
+}
+
+public void onCredit(View v){
+	
+	if(f.exists()){
+		
+	final Dialog d=new Dialog(this);
+	d.setTitle("Enter the details");
+	TableLayout tl=new TableLayout(this);
+	TableRow tr=new TableRow(this);
+	
+	TextView tv=new TextView(this);
+	tv.setText("Account ID");
+	EditText et=new EditText(this);
+	et.setText("Enter ID");
+	et.setId(21);
+	tr.addView(tv);
+	tr.addView(et);
+	TableRow tr1=new TableRow(this);
+	TextView tv1=new TextView(this);
+	tv1.setText("Amount");
+	EditText et1=new EditText(this);
+	et1.setText("Enter Amount");
+	et1.setId(22);
+	tr1.addView(tv1);
+	tr1.addView(et1);
+	TableRow tr2=new TableRow(this);
+	Button okBtn=new Button(this);
+	okBtn.setText("OK");
+	okBtn.setId(30);
+	tr2.addView(okBtn);
+	
+	tl.addView(tr);
+	tl.addView(tr1);
+	tl.addView(tr2);
+	d.setContentView(tl);
+	okBtn.setOnClickListener(new View.OnClickListener(){
+		public void onClick(View v)
+		{
+			
+			EditText e=(EditText)d.findViewById(21);
+			EditText e1=(EditText)d.findViewById(22);
+			
+			String s=e.getText().toString();
+			String s1=e1.getText().toString();
+			if(validate(s1)){
+				if(!s.equals(""))
+			credit(s,s1);
+				else {alert("name field is empty");}
+			}
+			d.dismiss();
+		}
+	});
+	
+	
+	d.show();
+	}
+	else {
+		alert("create database first");
+	}
+	
+}
+ public void credit(String s,String s1){
+	try{ 
+	 db=dtbasehelper.getWritableDatabase();
+		Cursor res=db.rawQuery("select * from bank where _id="+s, null);
+		
+				if((res.moveToFirst())==false)
+				{
+					alert("No such Account ID");
+				}
+				else if(creditFlaf==true){
+					creditFlaf=false;
+					String amt=res.getString(2);
+					float newAmt=((Float.valueOf(amt.trim()).floatValue()))-((Float.valueOf(s1.trim()).floatValue()));
+					if(newAmt<500){
+						alert("Cannot proceed. Minimum Balance should be Rs 500");
+					}else{
+						ContentValues cv=new ContentValues();
+						cv.put("Amount", newAmt);
+						db.update("bank",cv,"_id="+s,null);
+						showDetails(s);
+						db.close();
+					}
+				}
+				else{
+					String amt=res.getString(2);
+					float newAmt=((Float.valueOf(amt.trim()).floatValue())+(Float.valueOf(s1.trim()).floatValue()));
+					ContentValues cv=new ContentValues();
+					cv.put("Amount", newAmt);
+					db.update("bank",cv,"_id="+s,null);
+					showDetails(s);
+					db.close();
+				}
+	}catch(SQLiteException e){
+		alert("Inputs are Invalid");
+	}
+	catch(NumberFormatException e){
+		alert("Inputs are Invalid");
+	}
+	
+				
+	 
+ }
+
+   public void onWithdraw(View v){
+	   creditFlaf=true;
+	   onCredit(v);
+   }
+   
+   public void onDelete(View v) {
+   	if(f.exists()){
+   		
+   	final Dialog del=new Dialog(this);
+   	LinearLayout ll=new LinearLayout(this);
+   	ll.setOrientation(LinearLayout.VERTICAL);
+   	 //String stringId;
+  // 	if(f.exists()){
+   	TextView tv=new TextView(this);
+   	tv.setText("Enter the Account ID deleted");
+   	final EditText et=new EditText(this);
+   	et.setText("Enter ID");
+   	et.setId(42);
+   	Button btn=new Button(this);
+   	btn.setText("OK");
+   	
+   	ll.addView(tv);
+   	ll.addView(et);
+   	ll.addView(btn);
+   	
+   	del.setContentView(ll);
+   	del.show();
+   	btn.setOnClickListener(new OnClickListener() {
+   		public void onClick(View v){
+   		EditText et1=(EditText)del.findViewById(42);
+   		
+   		Log.i("the value od Id",et1.getText().toString());
+   		if(validate(et1.getText().toString()))
+   		deleteAccount(et1.getText().toString());
+   		
+   			del.dismiss();
+   		}
+   	});
+   	}
+   	else{
+   		alert("Create database first");
+   	}
+   }
+  /* 	}
+   	else{
+   		alert("create database first");
+   	}
+   	
+   } */
+   
+   public void deleteAccount(String stringId){
+   	if(stringId.equals("")){
+   		alert("field is empty");
+   	}
+   	else {
+   		try {
+   	db=dtbasehelper.getWritableDatabase();
+   	if(db.delete("bank","_id="+stringId,null)>0){
+   	alert("Your Account Id "+stringId+"has been deleted");
+   	    }
+   	else{
+   		alert("No such account ID");
+   	}
+   	db.close();
+    }
+   	
+   	catch(SQLiteException e){
+		alert("Inputs are Invalid");
+	}
+   }
+}
+	
+	public boolean validate(String v){
+		boolean flag=true;
+		
+			if(v.equals("")){
+				flag=false;
+				alert("Fields are empty");
+				
+			}
+			else if((v.matches("^[0-9]+$"))||(v.matches("^[0-9]+\\.[0-9]+$"))){
+				flag=true;
+				
+			}
+			else{
+				flag=false;
+				alert("Invalid Inputs!!!");
+			}
+				
+     
+     
+		return flag;
+		
+	}
+	public void toServices(View v){
+		
+		final Dialog fields=new Dialog(this);
+		
+		Button btn1,btn2;
+		
+		fields.setContentView(R.layout.screen3);
+		fields.setTitle("Select Service");
+		btn1=(Button)fields.findViewById(R.id.create);
+		btn1.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				fields.dismiss();
+				onCreateAccount(v);
+				
+			}
+		});
+		
+		btn2=(Button)fields.findViewById(R.id.delete);
+		btn2.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				fields.dismiss();
+				onDelete(v);
+				
+			}
+		});
+		
+		fields.show();
+		
+	}
+
+	public void toTransactions(View v){
+
+		final Dialog fi=new Dialog(this);
+
+		Button btn11,btn12,btn13;
+		
+		fi.setContentView(R.layout.screen2);
+		fi.setTitle("Select Transaction");
+		btn11=(Button)fi.findViewById(R.id.credit);
+		btn11.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				fi.dismiss();
+				onCredit(v);
+				
+			}
+		});
+		
+		btn12=(Button)fi.findViewById(R.id.Debit);
+		btn12.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				fi.dismiss();
+				onWithdraw(v);
+				
+			}
+		});
+		
+		btn13=(Button)fi.findViewById(R.id.showdetails);
+		btn13.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				fi.dismiss();
+				details(v);
+				
+			}
+		});
+
+		fi.show();
+	}
+
+}

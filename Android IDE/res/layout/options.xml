@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:gravity="center"
+android:layout_height="fill_parent"
+android:background="@color/white"
+android:orientation="vertical">
+
+	<Button 
+	    android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+		android:textSize="1dp"
+    	android:text="exp"
+    	android:background="@drawable/workspace1"
+		/>
+    <TextView 
+        android:text="PROJECT EXPLORER"
+		android:paddingLeft="4dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textStyle="bold"
+        android:textColor="#964B00"
+        android:textSize="20dp"
+     />
+   
+ <TableLayout
+ android:layout_width="fill_parent"
+ android:layout_height="wrap_content"
+ android:stretchColumns="1"
+ android:background="@drawable/explore"
+  >
+ 
+	
+  
+   <TableRow >
+	  <View
+ android:layout_span="6"      
+ android:layout_width="fill_parent"
+ android:layout_height="0.3dp"
+ android:background="#FFFFF0" />
+
+	    
+   </TableRow>
+
+  <TableRow android:paddingTop="15dp"
+       >
+    <TextView 
+        android:id="@+id/prjname0"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_span="3"
+    	android:textColor="#000000"
+    	android:text="Empty"
+    />
+    
+    <ImageButton android:id="@+id/new0"
+		
+		android:src="@drawable/addbutton"
+       android:background="@null"
+		android:layout_width="wrap_content"
+		android:onClick="selectProj"
+		android:layout_height="wrap_content"
+		android:paddingRight="5dp"/>
+    
+    
+	  <ImageButton android:id="@+id/delete0"
+		
+		android:src="@drawable/deletebutton"
+       android:background="@null"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:onClick="deletFileEntry"
+		android:paddingRight="5dp"
+		/>
+	  
+	  <ImageButton 
+	      android:id="@+id/open0"
+	      android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/openbutton"
+       android:background="@null"
+	      android:onClick="openProj"
+	        
+	  />
+	</TableRow>
+  <TableRow android:paddingTop="15dp"
+      >
+    <TextView 
+        android:id="@+id/prjname1"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_span="3"
+    	android:textColor="#000000"
+    	android:text="Empty"
+    />
+    
+    <ImageButton 
+        android:id="@+id/new1"
+		android:paddingRight="5dp"
+		android:src="@drawable/addbutton"
+       android:background="@null"
+       android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:onClick="selectProj"
+		/>
+    
+     <ImageButton 
+        android:id="@+id/delete1"
+		android:src="@drawable/deletebutton"
+       android:background="@null"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingRight="5dp"
+		android:onClick="deletFileEntry"/>
+     
+	 <ImageButton 
+	     android:id="@+id/open1" 
+	     android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/openbutton"
+       android:background="@null"
+	     
+	     android:onClick="openProj"/>
+  </TableRow>
+
+  <TableRow android:paddingTop="15dp"
+      >
+    <TextView 
+        android:id="@+id/prjname2"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_span="3"
+    	android:textColor="#000000"
+    	android:text="Empty"
+    />
+    
+    <ImageButton android:id="@+id/new2"
+		
+		android:src="@drawable/addbutton"
+       android:background="@null"
+       android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingRight="5dp"
+		android:onClick="selectProj"
+		/>
+     <ImageButton 
+         android:id="@+id/delete2"
+		android:src="@drawable/deletebutton"
+       android:background="@null"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingRight="5dp" 
+		android:onClick="deletFileEntry" />
+     
+     
+	 <ImageButton 
+	     android:id="@+id/open2" 
+	     android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/openbutton"
+       android:background="@null"
+   
+	     android:onClick="openProj" />
+  </TableRow>
+
+ <TableRow android:paddingTop="15dp"
+     >
+     <TextView 
+         android:id="@+id/prjname3"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content" 
+     android:layout_span="3"
+     android:textColor="#000000"
+     android:text="Empty"
+    />
+     
+     <ImageButton android:id="@+id/new3"
+		
+		android:src="@drawable/addbutton"
+       android:background="@null"
+       android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:onClick="selectProj"
+		android:paddingRight="5dp"/>
+     
+     <ImageButton 
+     android:id="@+id/delete3"
+       
+     android:src="@drawable/deletebutton"
+       android:background="@null"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:onClick="deletFileEntry"
+		android:paddingRight="5dp" />
+     
+    <ImageButton 
+     android:id="@+id/open3" 
+     android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/openbutton"
+       android:background="@null"
+       android:onClick="openProj"/>
+    
+   </TableRow>
+   
+  <TableRow android:paddingTop="15dp"
+    
+      >
+     <TextView 
+      android:id="@+id/prjname4"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:layout_span="3"
+    android:textColor="#000000"
+    android:text="Empty"
+    />
+     
+   <ImageButton android:id="@+id/new4"
+		
+    android:src="@drawable/addbutton"
+       android:background="@null"
+       android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:onClick="selectProj"
+	android:paddingRight="5dp"/>
+     
+   <ImageButton 
+    android:id="@+id/delete4"
+    
+    android:src="@drawable/deletebutton"
+       android:background="@null"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:onClick="deletFileEntry" 
+		android:paddingRight="5dp"/>
+   
+   <ImageButton 
+    android:id="@+id/open4" 
+    android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/openbutton"
+       android:background="@null"
+       android:onClick="openProj" />
+  </TableRow>
+	
+  <TableRow >
+	  <View
+ android:layout_span="6"      
+ android:layout_width="fill_parent"
+ android:layout_height="0.3dp"
+ android:background="#FFFFF0" />
+
+	    
+	</TableRow>
+  
+ </TableLayout>
+ 
+</LinearLayout>

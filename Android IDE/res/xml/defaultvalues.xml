@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Types>
+	<Type>
+		<properties>
+			<nil></nil>
+			<layoutHeight>wrap_content</layoutHeight>
+			<layoutWidth>wrap_content</layoutWidth>
+			<textOfView>Text</textOfView>   
+			<padding>10dp</padding>
+			<margin>0dp</margin>
+			<onClick>null</onClick>
+           </properties>
+			
+	</Type>
+</Types>

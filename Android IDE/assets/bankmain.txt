@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+android:layout_height="fill_parent">
+
+<LinearLayout 
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:id="@+id/tablelayttemp"
+android:orientation="vertical" >
+
+<LinearLayout android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+
+    <TextView 
+    android:text="WELCOME TO BANK APPLICATION"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>   
+    
+
+    <Button
+   android:id="@+id/db"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:text="Create Database" 
+   android:onClick="onDatabase"/>
+    
+</LinearLayout>    
+
+<Button
+    android:id="@+id/create"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Create Account" 
+    android:layout_span="2"
+    android:onClick="onCreateAccount"/>
+<Button
+    android:id="@+id/credit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Credit" 
+    android:layout_span="2"
+    android:onClick="onCredit"/>
+
+<Button
+    android:id="@+id/Debit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Withdraw" 
+    android:layout_span="2"
+    android:onClick="onWithdraw"/>
+
+<Button
+    android:id="@+id/delete"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Delete Account" 
+    android:layout_span="2"
+    android:onClick="onDelete"/>
+<Button
+    android:id="@+id/showdetails"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Show Details" 
+    android:layout_span="2"
+    android:onClick="details"/>
+
+
+
+</LinearLayout>
+</ScrollView>

@@ -1,0 +1,42 @@
+package org.example.hello;
+
+import android.database.sqlite.SQLiteOpenHelper;
+import android.app.Dialog;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.view.*;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+
+public class DataBaseHelper extends SQLiteOpenHelper{
+	 static String databaseName="bankdatabase";
+	 static int version=1;
+	 static String tableName="bank";
+	public DataBaseHelper(Context context) {
+		
+		super(context,databaseName,null,version);
+		Log.i("inside constructor","inside constructor");
+	}
+	
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		
+		db.execSQL(Next.createTable);
+		Log.i("create","enter onCreate");
+	}
+	
+   @Override
+	
+	public void onUpgrade(SQLiteDatabase db,int oldVersion, int newVersion) {
+		//String sql="create table " + tableName + "(Name ,Price,Quatity,Discount,Tax)";
+		//db.execSQL(sql);
+		Log.i("onUpgrade","enter onUpgrade");
+	}
+
+}

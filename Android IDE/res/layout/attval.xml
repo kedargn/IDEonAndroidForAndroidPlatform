@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     android:id="@+id/attributevallayout"
+    android:orientation="horizontal" >
+    <TableRow >
+    
+    <TextView
+        android:id="@+id/attrtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     />
+    
+    <EditText
+        android:id="@+id/attrval"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+    
+   />
+   </TableRow>
+    
+        <TableRow >
+    <Button
+        android:id="@+id/attrok"
+        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="OK" />
+    
+    </TableRow>
+    </TableLayout>

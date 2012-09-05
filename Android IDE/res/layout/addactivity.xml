@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+ <LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+     <TextView 
+        android:text="Enter the Name of Activity"
+        android:id="@+id/alter"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		/>
+     
+     <EditText  
+        android:id="@+id/activtyname"
+        android:hint="New file name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"  />
+     
+     <Button android:id="@+id/okactivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="Ok" /> 
+    </LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:background="#FF9966" >
+    
+    <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     
+    android:orientation="vertical" >
+    
+      <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     
+    android:orientation="horizontal" >
+        
+        
+    <Button android:id="@+id/savejava"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="save"
+    android:textSize="1dp"
+    android:background="@drawable/savebutton"
+    android:onClick="onSave"/> 
+          
+          
+    <Button android:id="@+id/run"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="Run"
+    android:textSize="1dp"
+    android:background="@drawable/runbutton"
+    android:onClick="onRun"/> 
+    
+         
+    <Button android:id="@+id/activityplus"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="Activity=+1" 
+    
+    android:onClick="onActivityPlus"/> 
+            
+      <Button android:id="@+id/switchactivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:text="switch"
+    
+    
+    android:onClick="onActivitySwitch"/> 
+           
+     </LinearLayout>
+     
+    <EditText android:paddingTop="5dp" 
+        android:id="@+id/javatextarea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:singleLine="false"
+        android:layout_weight="10"
+        android:textSize="10dp"
+         />
+    </LinearLayout>
+</ScrollView>
+    

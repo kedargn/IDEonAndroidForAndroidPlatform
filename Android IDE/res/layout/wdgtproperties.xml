@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@drawable/gears">
+       
+    
+
+<TableLayout  
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:stretchColumns="1"  >
+    
+<TableRow >     
+    <TextView
+            android:id="@+id/idprop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:textColor="#FF0000"
+           
+            android:textStyle="bold"
+            android:text="Set properties for " />
+    </TableRow>
+    <TableRow >     
+    <TextView
+            android:id="@+id/idprop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:textColor="#FF0000"
+           
+            android:textStyle="bold"
+            android:text="widgets here.... " />
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/idprop"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" 
+            android:textColor="#FF0000"
+            android:text="  Id "   />
+        
+        <EditText 
+            android:id="@+id/idetprop"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:clickable="false"
+            android:focusable="false"/>
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/widthprop"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" 
+            android:textColor="#FF0000"
+            android:text="  Width "   />
+        
+        <EditText 
+            android:id="@+id/widthetprop"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"/>
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/heightprop"
+            android:layout_width="100dp"
+            android:textColor="#FF0000"
+            android:layout_height="wrap_content" 
+            android:text="  Height "   />
+        
+        <EditText 
+            android:id="@+id/heightetprop"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"/>
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/paddingprop"
+            android:textColor="#FF0000"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" 
+            android:text="  Padding "   />
+        
+        <EditText 
+            android:id="@+id/paddingetprop"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/textprop"
+            android:layout_width="100dp"
+            android:textColor="#FF0000"
+            android:layout_height="wrap_content" 
+            android:text="  Text "   />
+        
+        <EditText 
+            android:id="@+id/textetprop"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"/>
+    </TableRow>
+
+   
+    
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/onclickprop"
+            android:layout_width="100dp"
+            android:textColor="#FF0000"
+            android:layout_height="wrap_content" 
+            android:text="onclick listener"   />
+        
+        <EditText 
+            android:id="@+id/onclicketprop"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"/>
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/orderprop"
+            android:layout_width="100dp"
+            android:textColor="#FF0000"
+            android:layout_height="wrap_content" 
+            android:text="Order"   />
+        
+        <EditText 
+            android:id="@+id/orderetprop"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/qtyprop"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" 
+            android:text="Quantity"   />
+        
+        <EditText 
+            android:id="@+id/qtyetprop"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_span="1"/>
+    </TableRow>
+   
+    
+    <TableRow>
+       <Button 
+         android:id="@+id/defvalok"
+         android:layout_marginLeft="80dp"
+         android:layout_width="wrap_content" 
+         android:layout_height="wrap_content"
+         android:text="OK"
+         
+         
+         android:layout_column="1"  />
+    
+   </TableRow>
+ </TableLayout>
+ </ScrollView>
+    

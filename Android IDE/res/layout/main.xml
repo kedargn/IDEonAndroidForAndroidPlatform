@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     
+    android:orientation="vertical" 
+    android:background="@drawable/ms1">
+    
+
+   <TextView
+        android:layout_width="fill_parent"
+        android:id="@+id/wel"
+        android:layout_height="wrap_content"
+        android:textSize="60dp"
+        android:textColor="#CC0000"
+        android:text="AndIDE"
+        android:paddingTop="60dp"
+        
+         />
+        
+   
+   <TextView 
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" 
+       android:textSize="20dp"
+       android:textColor="#FF0000"
+       android:text="Develop your apps at your finger tips with more flexibility.. "
+       android:paddingTop="150dp"
+   />
+     <TableLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:stretchColumns="1">
+  <TableRow>
+     <ImageButton
+       android:id="@+id/next"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/hibutton"
+       android:background="@null"
+       android:onClick="toNext"
+       android:layout_column="2"
+                   
+     />
+  </TableRow>
+   
+  <TableRow >   
+       
+       <ImageButton
+       android:id="@+id/about"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:src="@drawable/helpbutton"
+       android:background="@null"
+       android:onClick="toAbout"
+         android:layout_column="2"
+       />  
+       
+   </TableRow>
+  </TableLayout>
+</LinearLayout>

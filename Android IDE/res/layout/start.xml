@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+     
+    android:orientation="vertical" 
+    android:background="@drawable/guys"
+    android:gravity="center_vertical">
+    
+    
+    
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+    	android:layout_marginLeft="30dp"    
+        android:text="PRESENTS"
+     />
+
+   
+</LinearLayout>

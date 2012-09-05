@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="0,1">
+    <TableRow >
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Key"/>
+        <EditText android:id="@+id/key"
+            android:layout_width="fill_parent"
+            android:hint="enter the key"
+            android:layout_height="wrap_content" />
+        
+    </TableRow>
+    
+    <TableRow >
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Value"/>
+        <EditText android:id="@+id/value"
+            android:layout_width="fill_parent"
+            android:hint="Enter the value"
+            android:layout_height="wrap_content" />
+        
+    </TableRow>
+    
+    <TableRow >
+        <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/setok"
+            android:text="Ok"/>
+                
+    </TableRow>
+</TableLayout>

@@ -1,0 +1,507 @@
+package org.example.hello;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.LoggingMXBean;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableLayout.LayoutParams;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.util.Log;
+import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import android.content.DialogInterface;
+
+
+public class Helloworld extends Activity {
+    /** Called when the activity is first created. */
+	File f;
+	float tax=0,discount=0;
+	static boolean flag=false;
+	String[] values=new String[2];
+	String[] fieldNames;
+	String fullFieldNames;
+	static String createTable;
+	SQLiteDatabase db;
+	int id=0;
+	DataBaseHelper dtbasehelper;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+       Log.i("pacakege name is",this.getPackageName());
+        f=new File("/data/data/"+this.getPackageName()+"/databases"); 
+        setContentView(R.layout.main);
+        if(f.exists())
+        dtbasehelper=new DataBaseHelper(this);
+        ifExists(1);
+        
+    }
+    
+    
+    public void onDatabase(View v) {
+    	 
+    	final Dialog fields=new Dialog(this);
+    	LinearLayout ll=new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	
+    	TextView tv=new TextView(this);
+    	tv.setText("Enter the fields name separated by comma");
+    	ll.addView(tv);
+    	EditText et=new EditText(this);
+    	et.setId(10);
+    	et.setText("Name,Quantity,Price");
+    	ll.addView(et);
+    	
+    	Button btn=new Button(this);
+    	btn.setText("Create");
+    	ll.addView(btn);
+    	
+    	fields.setContentView(ll);
+    	fields.show();
+    	btn.setOnClickListener(new OnClickListener(){
+    		public void onClick(View v) {
+    			
+    			EditText fEt=(EditText)fields.findViewById(10);
+    			fullFieldNames=fEt.getText().toString();
+    			fields.dismiss();
+    			createTable();
+    		}
+    	});
+    	
+    }
+    	public void createTable(){
+    		
+    	fieldNames=fullFieldNames.split(",");
+    	createTable="CREATE TABLE grocery(_id INTEGER PRIMARY KEY AUTOINCREMENT";
+    	
+    	 for(int i=0;i<fieldNames.length;i++) {
+    	createTable+=","+fieldNames[i];
+    	 }
+    	createTable+=");";
+    	flag=true;
+    	Log.i("the create query is",createTable);
+    	 dtbasehelper=new DataBaseHelper(this);	
+    	 db=dtbasehelper.getReadableDatabase();
+    	 Cursor res=db.rawQuery("select * from grocery", null);
+    }
+    
+    	
+    	public void onOk(View v) {
+    		 boolean empty=false;
+    		int z=0;
+    		Log.i("database exists?",f.getAbsolutePath()+"  "+f.exists());
+    		try{
+    			if(f.exists())   {
+    			 dtbasehelper=new DataBaseHelper(this);
+    		db=dtbasehelper.getReadableDatabase();
+    		Cursor sel=db.rawQuery("select * from grocery", null);
+    		fieldNames=sel.getColumnNames();
+    		db.close();
+    		
+    		for(int i=0;i<fieldNames.length;i++) {
+    			Log.i("the Field name "+i,fieldNames[i]);
+    			
+    		}
+    		
+    		
+    		String insert="INSERT INTO grocery IF EXISTS(Name,Quantity,Price) VALUES (";
+    		db=dtbasehelper.getWritableDatabase();
+    		EditText et=(EditText)findViewById(R.id.second);
+    		
+    		values[z++]=et.getText().toString();
+    		et=(EditText)findViewById(R.id.fourth);
+    		values[z++]=et.getText().toString();
+    		
+    		boolean flagValidate=true;
+    		flagValidate=validate(flagValidate);
+    		
+    		Log.i("tha value of flagValifate",""+flagValidate);
+    		if(flagValidate==false){
+    			alert("Invalid input");
+    		}
+    		else{
+    		
+    		Log.i("the length of values is",""+values.length);
+    		
+    		
+    		 float price=ifExists(0);
+    		 
+    		 
+    		 for(int i=0;i<values.length;i++) {
+    			 if(values[i].equals("")){
+    				 alert("some fields are empty");empty=true;
+    				 break;
+    			 }
+    		 }
+    		 if(price!=-1){
+    		 
+    		 if(empty==false){
+    			 
+    			 String vll= ""+price*(Float.valueOf(values[1].trim()).floatValue());
+    		 
+    			 ContentValues cv=new ContentValues();
+        		 for(int i=0;i<values.length;i++) {
+        			 Log.i("the value of i in DB",""+i);
+        		cv.put(fieldNames[i+1],values[i]);
+        		 }
+    			 cv.put("Price",vll);
+    			 
+    	    long res=db.insert("grocery", null,cv);
+    	    db.close();
+    	 if(res==-1) {
+    		 Log.e("error in inserting","Insertion FAILED");
+    		 
+    	      }
+    		 }
+    	   
+    	 db.close();
+    	}
+    	}
+    			}
+    	else{
+      alert("create database first");
+    	
+    }	
+   }
+    	catch(Exception e){
+    		alert(e.toString());
+    		e.printStackTrace();
+    	 }
+    	}//	else{
+    		//	alert("first create database");
+    	//	}
+    	
+    
+    	
+    	public boolean validate(boolean flagValidate){
+          for(int i=1;i<values.length;i++){
+        	  if((values[i].matches("^[0-9]+$"))||(values[i].matches("^[0-9]+\\.[0-9]+$"))){
+        	  flagValidate=true;
+        	  
+        	  }
+        	  else {flagValidate=false;break;}
+          }
+    		return flagValidate;
+    		
+    	}
+    	
+    	public float ifExists(int flag){
+    		float price=-1;
+    		try{
+    			
+    		File parseFile=new File(Environment.getExternalStorageDirectory()+"/xmlfiles/"+this.getPackageName()+"/share.xml");
+        	Log.i("abs path is(Widgets.java)",parseFile.getAbsolutePath());
+        	
+        	DocumentBuilderFactory docBuildFactory=DocumentBuilderFactory.newInstance();
+        	
+        	DocumentBuilder docBuilder=docBuildFactory.newDocumentBuilder();
+        	
+        	Document doc=docBuilder.parse(parseFile);
+        	if(flag==1){
+        		getTaxnDiscount(doc);
+        		return -1;
+        	}
+        	else{
+        	Element root=doc.getDocumentElement();
+            NodeList child=root.getChildNodes();
+            for(int i=0;i<child.getLength();i++){
+            	if(child.item(i).getNodeType()==Node.ELEMENT_NODE){
+            		if(child.item(i).getNodeName().equalsIgnoreCase(values[0])){
+            			alert(values[0]+ " is in stock");
+            			 NodeList n=child.item(i).getChildNodes();
+            			 Log.i("the no of child",""+n.getLength());
+            			for(int z=0;z<n.getLength();z++){
+            				if(n.item(z).getNodeType()==Node.TEXT_NODE){
+            				price=Float.valueOf(n.item(z).getNodeValue().trim());
+            				
+            				Log.i("tha price is",n.item(z).getNodeValue());
+            				break;
+            				}
+            				
+            			}		
+            			}
+            		}
+            	}
+            }
+            
+            
+           
+            
+    		} catch(SAXException e) { 
+                e.printStackTrace();             
+            } 
+            catch(IOException e) { 
+               e.printStackTrace();             
+            } 
+            catch(ParserConfigurationException e) { 
+              e.printStackTrace();             
+            }if(price==-1)
+    		 alert("Item does not exists");
+    		return price;
+    	}
+    	
+    	public void getTaxnDiscount(Document doc){
+    		Element root=doc.getDocumentElement();
+            NodeList child=root.getChildNodes();
+            for(int i=0;i<child.getLength();i++){
+            	if(child.item(i).getNodeType()==Node.ELEMENT_NODE){
+            		if((child.item(i).getNodeName().equalsIgnoreCase("tax"))){
+            			NodeList n=child.item(i).getChildNodes();
+            			if(n.item(0).getNodeType()==Node.TEXT_NODE){
+            				tax=Float.valueOf(n.item(0).getNodeValue().trim()).floatValue();
+            				Log.i("the tax is",""+tax);
+            			}
+            				
+            		}
+            		if((child.item(i).getNodeName().equalsIgnoreCase("discount"))){
+            			NodeList n=child.item(i).getChildNodes();
+            			if(n.item(0).getNodeType()==Node.TEXT_NODE){
+            				discount=Float.valueOf(n.item(0).getNodeValue().trim()).floatValue();
+            				Log.i("the discount is",""+discount);
+            			}
+            				
+            		}
+            		
+            	}
+    		
+            }
+    	}
+    	public void alert(String error){
+    		AlertDialog.Builder msg=new AlertDialog.Builder(this);
+	    	
+	    	msg.setMessage(error).setCancelable(false)
+	    	.setPositiveButton("ok",new DialogInterface.OnClickListener() {
+	    		public void onClick(DialogInterface d,int id) {
+	    		
+	    			d.dismiss();
+	    			
+	    		}
+	    	});
+	    	msg.show();
+    	}
+    
+    public void onBill(View v) {
+    	float totalAmt=0;
+    	if(f.exists()){
+    	db=dtbasehelper.getReadableDatabase();
+    	Cursor res=db.rawQuery("select * from grocery", null);
+    	
+    	res.moveToFirst();
+    	TableLayout tl=new TableLayout(this);
+    	tl.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,TableLayout.LayoutParams.WRAP_CONTENT));
+    	
+    	
+    	String[] colName=res.getColumnNames();
+    	tl=showTable(tl,colName,1);
+    	int len=colName.length;
+    			
+    			{
+    	while((!res.isAfterLast())&&(res!=null)) {
+    		
+    		
+    		Log.i("the len=res.getColumnCount() is",""+len);
+    		String[] fieldVal=new String[len];
+    		 for(int i=0;i<len;i++){
+    			 fieldVal[i]=res.getString(i);
+    			 }
+    		 totalAmt=totalAmt+((Float.valueOf(fieldVal[3].trim())));
+    		 
+    		 tl=showTable(tl,fieldVal,0);
+    		 res.moveToNext();
+    	}
+    	totalAmt=totalAmt-(totalAmt*(discount/100))+(totalAmt*(tax/100));
+		 
+    	Dialog dg=new Dialog(this);
+    	WindowManager.LayoutParams lp=new WindowManager.LayoutParams();
+    	lp.width=WindowManager.LayoutParams.FILL_PARENT;
+    	lp.height=WindowManager.LayoutParams.WRAP_CONTENT;
+    	TextView bill=new TextView(this);
+    	bill.setText("Amt="+new Float(totalAmt).toString());
+    	
+    	LinearLayout l=new LinearLayout(this);
+    	l.setOrientation(LinearLayout.VERTICAL);
+    	HorizontalScrollView hsv=new HorizontalScrollView(this);
+    	hsv.addView(l);
+    	l.addView(tl);
+    	l.addView(bill);
+    	dg.setContentView(hsv);
+    	dg.show();
+    	db.close();
+    	dg.getWindow().setAttributes(lp);
+    	}
+    }
+    	else {
+    		alert("Create database first");
+    	}
+    		
+    }
+    
+    public TableLayout showTable(TableLayout tl,String[] values,int heading) {
+    	
+    	TableRow tr=new TableRow(this);
+    	tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
+    	
+    	for(int i=0;i<values.length;i++) {
+    		TextView tv=new TextView(this);
+    		if(heading==1)
+    		tv.setText(values[i]+"     ");
+    		else
+    			tv.setText(values[i]+"  ");
+    		tr.addView(tv);
+    	}
+    	tl.addView(tr);
+    	return tl;
+    }
+    
+    public void onDelete(View v) {
+    	
+    	final Dialog del=new Dialog(this);
+    	LinearLayout ll=new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	 //String stringId;
+    	if(f.exists()){
+    	TextView tv=new TextView(this);
+    	tv.setText("Enter the ID of element to be deleted");
+    	final EditText et=new EditText(this);
+    	et.setId(22);
+    	Button btn=new Button(this);
+    	btn.setText("OK");
+    	
+    	ll.addView(tv);
+    	ll.addView(et);
+    	ll.addView(btn);
+    	
+    	del.setContentView(ll);
+    	del.show();
+    	btn.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v){
+    		EditText et1=(EditText)del.findViewById(22);
+    		
+    		Log.i("the value od Id",et1.getText().toString());
+    		if(validate(et1.getText().toString())){
+    		deleteRow(et1.getText().toString());
+    		
+    			del.dismiss();
+    		}else{
+    			alert("Invalid Input");
+    		}
+    	  }
+    	});
+    	
+    	}
+    	else{
+    		alert("create database first");
+    	}
+    	
+    }
+    public boolean validate(String v){
+		boolean flag=true;
+		
+			if(v.equals("")){
+				flag=false;
+				alert("Fields are empty");
+				
+			}
+			else if(v.matches("^[0-9]+$")){
+				flag=true;
+				
+			}
+			else{
+				flag=false;
+				alert("Invalid Inputs!!!");
+			}
+				
+     
+     
+		return flag;
+		
+	}
+
+    
+    public void deleteRow(String stringId){
+    	if(validate(stringId)){
+    	db=dtbasehelper.getWritableDatabase();
+    	if((db.delete("grocery","_id="+stringId,null))>0){
+    	alert("The item ID"+stringId+"deleted");
+    	 
+    	}
+    	else{alert("No such item ID");}
+    	db.close();
+    	}
+    }
+    
+    public void onAddField(View v) {
+    	
+    	if(f.exists()) {
+    	final Dialog add=new Dialog(this);
+    	LinearLayout ll=new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	
+    	TextView tv=new TextView(this);
+    	tv.setText("Enter the fields name to be added");
+    	ll.addView(tv);
+    	EditText et=new EditText(this);
+    	et.setId(15);
+    	ll.addView(et);
+    	
+    	Button btn=new Button(this);
+    	btn.setText("Ok");
+    	ll.addView(btn);
+    	
+    	add.setContentView(ll);
+    	add.show();
+    	
+    	btn.setOnClickListener(new OnClickListener() {
+    		public void onClick(View v){
+    		EditText e=(EditText)add.findViewById(15);
+    	    String addFieldName=e.getText().toString();
+    	    add.dismiss();
+    	    if((addFieldName.equals(""))||addFieldName.matches("^[0-9]+$"))
+    	    	alert("invalid input");
+    	    else
+    		addField(addFieldName);
+    		}
+    	});
+       }
+    	else{
+    		alert("create database first");
+    	}
+    }
+    
+    
+
+public void addField(String field) {
+	if(field.equals("")){
+		alert("field is empty");
+	}
+	else{
+	db=dtbasehelper.getWritableDatabase();
+	db.execSQL("ALTER TABLE grocery ADD COLUMN "+field);
+	
+	db.close();
+	}
+  }
+
+}

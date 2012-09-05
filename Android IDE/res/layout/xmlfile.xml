@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FF9966"  >
+    
+    <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+        android:orientation="vertical" 
+        
+        >
+
+        
+      <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" 
+        android:layout_marginTop="20dp"
+        
+        >
+        
+    
+    <Button android:id="@+id/mainplus"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:textSize="10dp"
+     android:onClick="onLayoutPlus"
+     android:text="Main=+1"  />
+    
+     
+    <Button android:id="@+id/switchmain"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:onClick="onSwitchLayout"
+     android:textSize="10dp"
+     android:text="Switch"  />
+    
+    
+    <Button android:id="@+id/savebtn"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:onClick="onTableLayout"
+     android:textSize="10dp"
+     android:text="TableLayout"  />
+     
+     <Button android:id="@+id/plusrowbtn"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:onClick="onPlusRow"
+      android:textSize="10dp"
+     android:text="Row=+1"  />
+    
+     <Button android:id="@+id/savebtn"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:onClick="onSave"
+     android:background="@drawable/savebutton"
+     android:textSize="1dp"
+     android:text="Save"  />
+     
+     <Button android:id="@+id/storebtn"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:onClick="onStore"
+     android:textSize="8dp"
+     android:text="Store"  />
+    
+    
+    </LinearLayout>
+      
+    <EditText android:id="@+id/xmltextarea"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:singleLine="false"
+        android:textSize="10dp"
+        android:layout_weight="5" />
+    </LinearLayout>
+</ScrollView>
+    

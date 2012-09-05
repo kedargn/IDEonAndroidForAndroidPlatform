@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical" >
+
+  <TextView 
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:textSize="20dp"
+  android:text="Type of project" />
+  
+  <Button
+  android:id="@+id/custombtn" 
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:text="Custom" />
+
+  <Button 
+  android:id="@+id/grcystbtn"    
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:text="Grocery store(Template)" />
+
+  
+  <Button 
+  android:id="@+id/banktbtn"    
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:text="Bank(Template)" />
+  
+</LinearLayout>

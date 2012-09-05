@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bank"
+    android:layout_gravity="center" >
+
+    <Button
+   android:id="@+id/db"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:text="Create Database" 
+   android:onClick="onDatabase"/>
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="20dp" >
+    
+    <ImageButton
+       android:id="@+id/services"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:src="@drawable/services"
+       android:background="@null"
+       android:onClick="toServices"
+         android:layout_column="2"
+       />
+    <TextView 
+        android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       
+        android:text="Services"
+        />
+    </LinearLayout>
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="30dp"
+    android:orientation="vertical" >
+       
+       <ImageButton
+       android:id="@+id/transactions"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:src="@drawable/transactions"
+       android:background="@null"
+       android:onClick="toTransactions"
+         android:layout_column="2"
+       />
+       <TextView 
+        android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       
+        android:text="Transactions"
+        />
+    </LinearLayout>
+    
+
+
+</LinearLayout>
